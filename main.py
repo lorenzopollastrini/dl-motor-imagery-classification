@@ -5,10 +5,10 @@ import pandas as pd
 from scipy.sparse import csr_matrix
 import tensorflow as tf
 from tensorflow.keras import Input, Sequential
-from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
 from tensorflow.keras.layers import Activation, BatchNormalization, Dense, Flatten, MaxPooling2D, Reshape
 from tensorflow.keras.losses import CategoricalCrossentropy
-from tensorflow.keras.metrics import F1Score
+from tensorflow.keras.metrics import F1Score, Precision, Recall
 from tensorflow.keras.regularizers import L2
 
 from custom import GraphConv
@@ -108,5 +108,5 @@ model.fit(
     training_set, training_labels,
     batch_size=1024, epochs=100,
     validation_data=(test_set, test_labels),
-    callbacks=[model_checkpoint_callback]
+    callbacks=[model_checkpoint_callback, TensorBoard(write_graph=False)]
 )
